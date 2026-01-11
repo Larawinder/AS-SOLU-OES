@@ -1,0 +1,426 @@
+/* ========================================
+   GLOBAL.CSS - Estilos compartilhados
+   Header, Footer, Reset e Estilos Base
+   Usado em TODAS as páginas do site
+   ======================================== */
+
+:root {
+  --bg-color:#0b0c10;
+  --card-bg:#1f2833;
+  --primary:#66fcf1;
+  --secondary:#45a29e;
+  --text:#ffffff;
+  --muted:#c5c6c7;
+}
+
+/* ===== RESET ===== */
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--bg-color);
+  color:var(--text);
+  font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+}
+
+/* ===== HEADER / NAVBAR ===== */
+header{
+  background:rgba(11,12,16,.95);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(102,252,241,.08);
+}
+
+.navbar{
+  max-width:1400px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 32px;
+  gap:24px;
+  min-height:65px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-shrink:0;
+}
+
+.brand img{
+  height:75px;
+  filter:drop-shadow(0 2px 4px rgba(102,252,241,.25));
+}
+
+.brand .nome-empresa{
+  display:block;
+  color:#fff;
+  font-weight:700;
+  letter-spacing:.3px;
+  font-size:1.1rem;
+  white-space:nowrap;
+}
+
+.brand-stacked{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:2px;
+  line-height:1.2;
+}
+
+.brand-stacked .nome-empresa{
+  font-size:1.05rem;
+}
+
+/* ===== CONTROLE DE LOGOS (DESKTOP/MOBILE) ===== */
+.logo-mobile {
+  display: none;
+}
+
+.logo-desktop {
+  display: block;
+}
+
+/* Header transparente no topo */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: transparent;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Header quando rola */
+header.scrolled {
+  background: rgba(11, 12, 16, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+/* Logo quando rola */
+.brand img {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.4));
+}
+
+
+/* Links do menu */
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:0;
+  align-items:center;
+  flex-wrap:nowrap;
+  margin:0;
+}
+
+.nav-links>li{
+  display:inline-flex;
+  align-items:center;
+  position:relative;
+}
+
+.nav-links>li>a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:500;
+  font-size:0.95rem;
+  padding:10px 14px;
+  border-radius:6px;
+  transition:all .3s ease;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  white-space:nowrap;
+  line-height:1;
+}
+
+.nav-links>li>a:hover{
+  color:var(--primary);
+  background:rgba(102,252,241,.08);
+}
+
+/* Dropdown */
+.dropdown{
+  position:relative;
+}
+
+.dropdown>a{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* Remove qualquer elemento extra dentro do link */
+.dropdown>a>*:not(:first-child):not(:last-child){
+  display:none;
+}
+
+/* Setinha animada do dropdown */
+.dropdown>a::after{
+  content:'▾';
+  font-size:1rem;
+  transition:transform .3s ease;
+  display:inline-block;
+  flex-shrink:0;
+}
+
+.dropdown:hover>a{
+  color:var(--primary);
+}
+
+.dropdown:hover>a::after{
+  transform:rotate(180deg);
+}
+
+/* Menu dropdown */
+.dropdown-menu{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:calc(100% + 8px);
+  background:var(--card-bg);
+  border:1px solid rgba(102,252,241,.15);
+  border-radius:10px;
+  min-width:220px;
+  padding:8px 6px;
+  display:none;
+  box-shadow:0 12px 32px rgba(0,0,0,.5),0 0 0 1px rgba(102,252,241,.1);
+  opacity:0;
+  z-index:100;
+}
+
+.dropdown:hover .dropdown-menu{
+  display:block;
+  opacity:1;
+  animation:fadeInDown .25s ease forwards;
+}
+
+@keyframes fadeInDown{
+  from{opacity:0;transform:translateX(-50%) translateY(-6px)}
+  to{opacity:1;transform:translateX(-50%) translateY(0)}
+}
+
+.dropdown-menu li{
+  list-style:none;
+}
+
+.dropdown-menu a{
+  display:block;
+  color:#fff;
+  text-decoration:none;
+  padding:10px 14px;
+  border-radius:7px;
+  transition:all .2s ease;
+  font-size:0.9rem;
+}
+
+.dropdown-menu a:hover{
+  background:rgba(102,252,241,.12);
+  color:var(--primary);
+  padding-left:18px;
+}
+
+/* Menu Toggle (Mobile) */
+.menu-toggle{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+  padding:8px;
+}
+
+.menu-toggle span{
+  width:26px;
+  height:3px;
+  background:#fff;
+  border-radius:2px;
+  transition:all .3s ease;
+}
+
+/* ===== RESPONSIVIDADE MENU ===== */
+@media(max-width:1200px){
+  .navbar{
+    padding:12px 24px;
+    gap:24px;
+  }
+  
+  .nav-links{
+    gap:2px;
+  }
+  
+  .nav-links>li>a{
+    padding:10px 14px;
+    font-size:0.9rem;
+  }
+}
+
+@media(max-width:920px){
+  /* ===== TROCA DE LOGOS NO MOBILE ===== */
+  .logo-desktop {
+    display: none;
+  }
+  
+  .logo-mobile {
+    display: block;
+  }
+  
+  .menu-toggle{display:flex}
+  
+  .nav-links{
+    position:fixed;
+    top:70px;
+    right:0;
+    bottom:0;
+    width:280px;
+    height:calc(100vh - 70px);
+    /* Fundo preto com gradiente ciano ocupando toda altura */
+    background: linear-gradient(180deg, 
+      rgba(11, 12, 16, 0.98) 0%, 
+      rgba(15, 20, 30, 0.98) 25%,
+      rgba(20, 25, 35, 0.98) 50%,
+      rgba(15, 20, 30, 0.98) 75%,
+      rgba(11, 12, 16, 0.98) 100%
+    );
+    backdrop-filter:blur(12px);
+    flex-direction:column;
+    align-items:stretch;
+    padding:20px 16px;
+    transform:translateX(110%);
+    transition:transform .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    gap:4px;
+    /* Borda com a cor primária */
+    border-left:2px solid rgba(102,252,241,.3);
+    box-shadow:-8px 0 24px rgba(0,0,0,.5), inset 1px 0 20px rgba(102,252,241,.08);
+    overflow-y:auto;
+  }
+  
+  .nav-links.open{
+    transform:translateX(0);
+  }
+  
+  .nav-links>li{
+    width:100%;
+  }
+  
+  .nav-links>li>a{
+    justify-content:space-between;
+    width:100%;
+  }
+  
+  .dropdown-menu{
+    position:static;
+    display:none;
+    border:none;
+    box-shadow:none;
+    padding:8px 0 8px 16px;
+    background:rgba(102,252,241,.05);
+    margin:4px 0;
+    border-radius:8px;
+    transform:none;
+    min-width:auto;
+  }
+  
+  .dropdown.open .dropdown-menu{
+    display:block;
+  }
+  
+  .dropdown>a::after{
+    content:'›';
+    font-size:1.2rem;
+  }
+  
+  .dropdown.open>a::after{
+    transform:rotate(90deg);
+  }
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  border-top:1px solid rgba(255,255,255,.08);
+  text-align:center;
+  color:var(--muted);
+  padding:32px 10px;
+  margin-top:40px;
+}
+
+/* ===== ESTILOS BASE REUTILIZÁVEIS ===== */
+
+/* Seções genéricas */
+.section{
+  padding:64px 20px;
+}
+
+.container{
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.section h2{
+  font-family:'Orbitron',sans-serif;
+  color:var(--primary);
+  font-size:2rem;
+  margin-bottom:12px;
+}
+
+.section p.lead{
+  color:var(--muted);
+  max-width:860px;
+  line-height:1.6;
+}
+
+/* Botão CTA reutilizável */
+.cta{
+  display:inline-block;
+  background:linear-gradient(90deg,var(--secondary),var(--primary));
+  color:#0b0c10;
+  font-weight:700;
+  padding:14px 28px;
+  border-radius:10px;
+  text-decoration:none;
+  transition:all .3s ease;
+  box-shadow:0 4px 15px rgba(102,252,241,.3);
+}
+
+.cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(102,252,241,.5);
+}
+
+/* Cards genéricos */
+.card{
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.06);
+  background:var(--card-bg);
+  transition:all .3s ease;
+}
+
+.card:hover{
+  border-color:rgba(102,252,241,.3);
+  transform:translateY(-4px);
+  box-shadow:0 8px 20px rgba(0,0,0,.3);
+}
+
+.card h3{
+  color:var(--text);
+  font-size:1.1rem;
+}
+
+.card img{
+  width:100%;
+  display:block;
+}
